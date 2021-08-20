@@ -57,10 +57,10 @@ def index(request):
                 return render(request, 'index.html', context)
         elif method == 'register':
             print('register')
-            fullname = request.POST.get('name-000')
+            # fullname = request.POST.get('name-000')
             email = request.POST.get('email-000')
             password = request.POST.get('password-000')
-            user = User.objects.create(fullname = fullname, email = email,password = make_password(password))
+            user = User.objects.create(email = email,password = make_password(password))
             user.save()
             context = {
                  "collectionstolookoutfor":collectionstolookoutfor,
