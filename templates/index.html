@@ -48,12 +48,12 @@
                     <div>
                         <!-- AUDIO -->
                         <audio id="demo">
-                            <source src="song1.mp3" type="audio/mpeg">
+                            <source src="media/{{song.audio}}" type="audio/mpeg">
                         </audio>
                         <!-- end  AUDIO -->
                         <div class="row" style="background: transparent;">
-                            <img class="frad" src="  {% static 'img/funradio.png' %}  " data-toggle="modal" data-target="#modelId"
-                                alt="funradio" style="cursor: pointer;" width="100" height="100">
+                            <img class="frad" src="  {% static 'img/funradio.png' %}  " data-toggle="modal"
+                                data-target="#modelId" alt="funradio" style="cursor: pointer;" width="100" height="100">
                             <img id="pause" onclick="togglePlay('pause')" src="  {% static 'img/pause-button.png' %}"
                                 style=" cursor: pointer; width: 40px; height: 40px; margin-top: 6%;" alt="">
                             <img id="play" onclick="togglePlay('play')" src=" {% static 'img/play-button.png' %} "
@@ -62,9 +62,7 @@
                             <img src="  {% static 'img/speaker.png' %} " alt="speaker"
                                 style="padding-left: 4px;width: 40px; height: 40px; margin-top: 6%;">
                         </div>
-                        <p style=" padding: 0; margin: 0; color: white;">Omah lay - understand <span><i
-                                    class="fa fa-caret-down" style="cursor: pointer;" onclick="opac()" id="caret-down"
-                                    aria-hidden="true"></i></span></p>
+                        <p style=" padding: 0; margin: 0; color: white;">{{song.artist}} - {{song.song_title}}</p>
                     </div>
                     <!-- </a> -->
 
@@ -89,12 +87,24 @@
                                     <div class="text-white" href="#"></div>
                                 </li>
                                 <!-- <li> <a href="#" class="btn mona-btn text-white">Login</a></li> -->
+                                {% if currentUser %}
+                                <li>
+                                    <form method="POST">
+                                        {% csrf_token %}
+                                        <input type="hidden" value="logout">
+
+                                        <button type="submit" name="" class="btn btn-block">Logout</button>
+                                    </form>
+                                </li>
+                                {% else %}
+
+
                                 <li><button type="button" name="" data-toggle="modal" data-target="#loginmodal"
                                         class="btn btn-block">Login</button></li>
                                 <li><button type="button" name="" data-toggle="modal" data-target="#signupmodal"
                                         style="border: none; background-color: transparent;"
                                         class=" text-white btn btn-block">Register</button></li>
-
+                                {% endif %}
 
                             </ul>
 
@@ -113,7 +123,7 @@
                 <div class="col-8" style="padding-left: 20px; background-color: black;">
                     <img id="song-img" style=" margin: auto; opacity: 0.3; height:70%; width: 100%;"
                         src=" {% static 'img/17.jpg' %}">
-                    <p style="color: aliceblue;">Understand - Omah Lay</p>
+                    <p style="color: aliceblue;">{{song.artist}} - {{song.song_title}}</p>
                 </div>
                 <div class="col-4" style="padding: 50px; color: white; background-color: #D3112B">
                     <h2 style="color: white;">Omah Lay</h2>
@@ -137,16 +147,13 @@
         <!-- Button trigger modal -->
         </div>
         <!-- break  -->
-
-
-
-
-
-
-
     </header>
 
     <!-- ***** Header Area End ***** -->
+
+
+
+
 
     <!-- ***** Welcome Area Start ***** -->
     <section class="welcome-area">
@@ -185,7 +192,8 @@
 
 
                         <div class="col-6">
-                            <img src=" {% static 'img/funradio.png' %}   " alt="funradio" style="width: 100%; padding: 0; margin: 0;">
+                            <img src=" {% static 'img/funradio.png' %}   " alt="funradio"
+                                style="width: 100%; padding: 0; margin: 0;">
 
                             <div
                                 style=" width: 100%;  height: 14%;  background: aliceblue; background-image: url('pepsi.png'); background-position: center; background-size: contain; background-repeat: no-repeat;">
@@ -222,16 +230,18 @@
                                     <img id="song-img" src="   {% static 'img/17.jpg' %}" alt="song img">
                                     <br>
                                     <p style="color: aliceblue;">
-                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Understand
-                                        - Omah Lay</p>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{song.artist}}
+                                        - {{song.song_title}}</p>
                                 </div>
                                 <div style="display: flex;">
                                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                     <div style="height: 90%; width: 90%; margin-top:0.3%; margin-left: 1%;">
-                                        <img id="pause" onclick="togglePlay('pause')" src=" {% static 'img/pause-button.png' %}"
+                                        <img id="pause" onclick="togglePlay('pause')"
+                                            src=" {% static 'img/pause-button.png' %}"
                                             style="cursor: pointer;  height:13%; width: 13%; padding-left: 8px;" alt="">
 
-                                        <img id="play" onclick="togglePlay('play')" src=" {% static 'img/play-button.png' %} "
+                                        <img id="play" onclick="togglePlay('play')"
+                                            src=" {% static 'img/play-button.png' %} "
                                             style="  cursor: pointer; height:13%; width: 13%; padding-left: 8px;"
                                             alt="">
 
@@ -266,7 +276,7 @@
                         .login-row {
                             background: rgba(255, 255, 255, 0.322);
                             height: 100%;
-                            width: 80%;
+                            width: 50%;
                             margin: auto;
                             border-radius: 20px;
                         }
@@ -301,21 +311,24 @@
                             <span aria-hidden="true" style="font-size: 70px;">&times;</span>
                         </button>
 
-                        <div class="login-row row">
-                            <div class="col-6 login-area">
+                        <div class="login-row">
+                            <div class="login-area">
                                 <h3> <b> Welcome back🎵🎵 </b> </h3>
                                 <p class="text-dark">Let The Fun Begin 🎉🎉🙌
                                 <p>
                                     <br>
 
-                                <form method="POST" action=".">
+                                <form method="POST">
                                     {% csrf_token%}
+
+                                    <input type="hidden" name="method" value="login">
+
                                     <div class="form-group">
                                         <label for=""><b>Email address </b> </label>
-                                        <input type="text" class="form-control" name="email-000" id="" aria-describedby="helpId"
-                                            placeholder="example@example.com">
+                                        <input type="text" class="form-control" name="email-000" id=""
+                                            aria-describedby="helpId" placeholder="example@example.com">
                                     </div>
-                                    <input type="hidden" name="method" value="login">
+
 
                                     <div class="form-group">
                                         <label for=""> <b> Password </b> </label>
@@ -334,8 +347,6 @@
                                             href="register.html" style="color: black;"><b>Create account</b></a></p>
                                 </form>
 
-                            </div>
-                            <div class="col-6 login-img">
                             </div>
                         </div>
                     </div>
@@ -358,7 +369,7 @@
                         .signup-row {
                             background: rgba(255, 255, 255, 0.322);
                             height: 100%;
-                            width: 80%;
+                            width: 50%;
                             margin: auto;
                             border-radius: 20px;
                         }
@@ -392,47 +403,47 @@
                             data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true" style="font-size: 70px;">&times;</span>
                         </button>
-                        <div class=" signup-row row">
-                            <div class="col-6 signup-area">
+                        <div class=" signup-row ">
+                            <div class="signup-area">
                                 <h3> <b> Create an account</b></h3>
                                 <p class="text-dark">Signup and listen to some goood tunes🙌
                                 <p>
 
-                                <form action="">
+                                <form method="POST">
+                                    {% csrf_token%}
+
+                                    <input type="hidden" name="method" value="register">
+
                                     <div class="form-group">
-                                        <label for=""><b>Username</b> </label>
-                                        <input type="text" class="form-control" name="" id="" aria-describedby="helpId"
-                                            placeholder=" e.g. Songgod">
+                                        <label for=""><b>Fullname</b> </label>
+                                        <input type="text" class="form-control" name="name-000" id=""
+                                            aria-describedby="helpId" placeholder=" e.g. Songgod">
                                     </div>
 
 
                                     <div class="form-group">
                                         <label for=""><b>Email address </b> </label>
-                                        <input type="email" class="form-control" name="" id="" aria-describedby="helpId"
-                                            placeholder="example@example.com">
+                                        <input type="email" class="form-control" name="email-000" id=""
+                                            aria-describedby="helpId" placeholder="example@example.com">
                                     </div>
 
                                     <div class="form-group">
                                         <label for=""> <b> Password </b> </label>
-                                        <input type="password" class="form-control" name="" id=""
+                                        <input type="password" class="form-control" name="password-000" id=""
                                             aria-describedby="helpId" placeholder="************">
                                     </div>
                                     <br>
 
-                                    <button type="button" name="" style="width: 100%; margin: auto;" id=""
+                                    <button type="submit" name="" style="width: 100%; margin: auto;" id=""
                                         class="btn btn-dark" btn-lg btn-block>Sign-up</button>
                                     <p style="float: right;"> <span class="text-dark"> Already have an account </span>
-                                        <a href="login.html" style="color: black;"><b>Signin</b></a></p>
+                                        <a href="login.html" style="color: black;"><b>Signin</b></a>
+                                    </p>
                                 </form>
 
 
 
                             </div>
-
-                            <div class="col-6 signup-img">
-
-                            </div>
-
 
                         </div>
 
@@ -569,6 +580,7 @@
 
 
     <!-- ***** About Us Area Start ***** -->
+    {% if currentUser %}
     <section class="mona-about-us-area mb-30 section-padding-80-0" style="background-color: rgb(17, 17, 17);">
 
         <div class="container">
@@ -718,21 +730,17 @@
                                                 <!-- First Thumbnail -->
                                                 <img class="first-thumbnail" src="media/{{ctlf.song_cover}}" alt="">
                                                 <!-- Second Thumbnail -->
-                                                <!-- <img class="second-thumbnail" src="media/{{ctlf.song_cover}}" alt=""> -->
-                                                <!-- Share Info -->
-                                                <div class="share-info">
-                                                    <!-- Share Icon -->
-                                                 
-                                                </div>
+                                                <img class="second-thumbnail" src="media/{{ctlf.song_cover}}" alt="">
                                             </div>
-                                            <div class="model-info">
-                                                <!-- <h3>Peter Alvarez</h3> -->
-                                                <h6>{{ctfl.title}}</h6>
-                                            </div>
-                                        </div>
-                                         {% endfor %}
 
-                                          <!-- Single Model Item -->
+                                            <div class="model-info">
+                                                <h3 style="text-align: center; color: white; ">{{ ctlf.title }}</h3>
+                                            </div>
+
+                                        </div>
+                                        {% endfor %}
+
+                                        <!-- Single Model Item -->
 
                                     </div>
                                 </div>
@@ -742,7 +750,7 @@
                 </div>
             </div>
         </section>
-        
+
         <!-- end  Test Mode -->
 
         <section class="mona-model-area1">
@@ -774,214 +782,24 @@
 
 
                                         <!-- Single Model Item -->
-                                        <div class="single-model-item">
-                                            <div class="model-thumbnail">
-                                                <!-- First Thumbnail -->
-                                                <img class="first-thumbnail" src="cs.jpg" alt="">
-                                                <!-- Second Thumbnail -->
-                                                <img class="second-thumbnail" src="cs.jpg" alt="">
-                                                <!-- Share Info -->
-                                                <div class="share-info">
-                                                    <!-- Share Icon -->
-                                                    <div class="share-icon">
-                                                        <a href="#"><i class="fa fa-play" aria-hidden="true"></i></a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="model-info">
-                                                <!-- <h3>Peter Alvarez</h3> -->
-                                                <h6>Song Title</h6>
-                                            </div>
-                                        </div>
 
-                                        <!-- Single Model Item -->
+                                        {% for nmtlf in newmusictolookoutfor %}
                                         <div class="single-model-item">
                                             <div class="model-thumbnail">
                                                 <!-- First Thumbnail -->
-                                                <img class="first-thumbnail" src="cs.jpg" alt="">
+                                                <img class="first-thumbnail" src="media/{{nmtlf.song_cover}}" alt="">
                                                 <!-- Second Thumbnail -->
-                                                <img class="second-thumbnail" src="cs.jpg" alt="">
+                                                <img class="second-thumbnail" src="media/{{nmtlf.song_cover}}" alt="">
                                                 <!-- Share Info -->
-                                                <div class="share-info">
-                                                    <!-- Share Icon -->
-                                                    <div class="share-icon">
-                                                        <a href="#"><i class="fa fa-play" aria-hidden="true"></i></a>
-                                                    </div>
-                                                </div>
                                             </div>
                                             <div class="model-info">
                                                 <!-- <h3>Peter Alvarez</h3> -->
-                                                <h6>Song Title</h6>
+                                                <h6 style="text-align: center; color: white;" >{{nmtlf.title}}</h6>
                                             </div>
                                         </div>
+                                        {% endfor %}
 
-                                        <!-- Single Model Item -->
-                                        <div class="single-model-item">
-                                            <div class="model-thumbnail">
-                                                <!-- First Thumbnail -->
-                                                <img class="first-thumbnail" src="cs.jpg" alt="">
-                                                <!-- Second Thumbnail -->
-                                                <img class="second-thumbnail" src="cs.jpg" alt="">
-                                                <!-- Share Info -->
-                                                <div class="share-info">
-                                                    <!-- Share Icon -->
-                                                    <div class="share-icon">
-                                                        <a href="#"><i class="fa fa-play" aria-hidden="true"></i></a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="model-info">
-                                                <!-- <h3>Peter Alvarez</h3> -->
-                                                <h6>Song Title</h6>
-                                            </div>
-                                        </div>
-
-                                        <!-- Single Model Item -->
-                                        <div class="single-model-item">
-                                            <div class="model-thumbnail">
-                                                <!-- First Thumbnail -->
-                                                <img class="first-thumbnail" src="cs.jpg" alt="">
-                                                <!-- Second Thumbnail -->
-                                                <img class="second-thumbnail" src="cs.jpg" alt="">
-                                                <!-- Share Info -->
-                                                <div class="share-info">
-                                                    <!-- Share Icon -->
-                                                    <div class="share-icon">
-                                                        <a href="#"><i class="fa fa-play" aria-hidden="true"></i></a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="model-info">
-                                                <!-- <h3>Peter Alvarez</h3> -->
-                                                <h6>Song Title</h6>
-                                            </div>
-                                        </div>
-
-                                        <!-- Single Model Item -->
-                                        <div class="single-model-item">
-                                            <div class="model-thumbnail">
-                                                <!-- First Thumbnail -->
-                                                <img class="first-thumbnail" src="cs.jpg" alt="">
-                                                <!-- Second Thumbnail -->
-                                                <img class="second-thumbnail" src="cs.jpg" alt="">
-                                                <!-- Share Info -->
-                                                <div class="share-info">
-                                                    <!-- Share Icon -->
-                                                    <div class="share-icon">
-                                                        <a href="#"><i class="fa fa-play" aria-hidden="true"></i></a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="model-info">
-                                                <!-- <h3>Peter Alvarez</h3> -->
-                                                <h6>Song Title</h6>
-                                            </div>
-                                        </div>
-                                        <!-- Single Model Item -->
-                                        <div class="single-model-item">
-                                            <div class="model-thumbnail">
-                                                <!-- First Thumbnail -->
-                                                <img class="first-thumbnail" src="cs.jpg" alt="">
-                                                <!-- Second Thumbnail -->
-                                                <img class="second-thumbnail" src="cs.jpg" alt="">
-                                                <!-- Share Info -->
-                                                <div class="share-info">
-                                                    <!-- Share Icon -->
-                                                    <div class="share-icon">
-                                                        <a href="#"><i class="fa fa-play" aria-hidden="true"></i></a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="model-info">
-                                                <!-- <h3>Peter Alvarez</h3> -->
-                                                <h6>Song Title</h6>
-                                            </div>
-                                        </div>
-
-                                        <!-- Single Model Item -->
-                                        <div class="single-model-item">
-                                            <div class="model-thumbnail">
-                                                <!-- First Thumbnail -->
-                                                <img class="first-thumbnail" src="cs.jpg" alt="">
-                                                <!-- Second Thumbnail -->
-                                                <img class="second-thumbnail" src="cs.jpg" alt="">
-                                                <!-- Share Info -->
-                                                <div class="share-info">
-                                                    <!-- Share Icon -->
-                                                    <div class="share-icon">
-                                                        <a href="#"><i class="fa fa-play" aria-hidden="true"></i></a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="model-info">
-                                                <!-- <h3>Peter Alvarez</h3> -->
-                                                <h6>Song Title</h6>
-                                            </div>
-                                        </div>
-
-                                        <!-- Single Model Item -->
-                                        <div class="single-model-item">
-                                            <div class="model-thumbnail">
-                                                <!-- First Thumbnail -->
-                                                <img class="first-thumbnail" src="cs.jpg" alt="">
-                                                <!-- Second Thumbnail -->
-                                                <img class="second-thumbnail" src="cs.jpg" alt="">
-                                                <!-- Share Info -->
-                                                <div class="share-info">
-                                                    <!-- Share Icon -->
-                                                    <div class="share-icon">
-                                                        <a href="#"><i class="fa fa-play" aria-hidden="true"></i></a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="model-info">
-                                                <!-- <h3>Peter Alvarez</h3> -->
-                                                <h6>Song Title</h6>
-                                            </div>
-                                        </div>
-
-                                        <!-- Single Model Item -->
-                                        <div class="single-model-item">
-                                            <div class="model-thumbnail">
-                                                <!-- First Thumbnail -->
-                                                <img class="first-thumbnail" src="cs.jpg" alt="">
-                                                <!-- Second Thumbnail -->
-                                                <img class="second-thumbnail" src="cs.jpg" alt="">
-                                                <!-- Share Info -->
-                                                <div class="share-info">
-                                                    <!-- Share Icon -->
-                                                    <div class="share-icon">
-                                                        <a href="#"><i class="fa fa-play" aria-hidden="true"></i></a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="model-info">
-                                                <!-- <h3>Peter Alvarez</h3> -->
-                                                <h6>Song Title</h6>
-                                            </div>
-                                        </div>
-
-                                        <!-- Single Model Item -->
-                                        <div class="single-model-item">
-                                            <div class="model-thumbnail">
-                                                <!-- First Thumbnail -->
-                                                <img class="first-thumbnail" src="cs.jpg" alt="">
-                                                <!-- Second Thumbnail -->
-                                                <img class="second-thumbnail" src="cs.jpg" alt="">
-                                                <!-- Share Info -->
-                                                <div class="share-info">
-                                                    <!-- Share Icon -->
-                                                    <div class="share-icon">
-                                                        <a href="#"><i class="fa fa-play" aria-hidden="true"></i></a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="model-info">
-                                                <!-- <h3>Peter Alvarez</h3> -->
-                                                <h6>Song Title</h6>
-                                            </div>
-                                        </div>
-
+                                       
 
                                     </div>
                                 </div>
@@ -1022,213 +840,24 @@
 
 
                                         <!-- Single Model Item -->
-                                        <div class="single-model-item">
-                                            <div class="model-thumbnail">
-                                                <!-- First Thumbnail -->
-                                                <img class="first-thumbnail" src="cs.jpg" alt="">
-                                                <!-- Second Thumbnail -->
-                                                <img class="second-thumbnail" src="cs.jpg" alt="">
-                                                <!-- Share Info -->
-                                                <div class="share-info">
-                                                    <!-- Share Icon -->
-                                                    <div class="share-icon">
-                                                        <a href="#"><i class="fa fa-play" aria-hidden="true"></i></a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="model-info">
-                                                <!-- <h3>Peter Alvarez</h3> -->
-                                                <h6>Song Title</h6>
-                                            </div>
-                                        </div>
 
-                                        <!-- Single Model Item -->
+                                        {% for nmotb in newmusicontheblock %}
                                         <div class="single-model-item">
                                             <div class="model-thumbnail">
                                                 <!-- First Thumbnail -->
-                                                <img class="first-thumbnail" src="cs.jpg" alt="">
+                                                <img class="first-thumbnail" src="media/{{nmotb.song_cover}}" alt="">
                                                 <!-- Second Thumbnail -->
-                                                <img class="second-thumbnail" src="cs.jpg" alt="">
-                                                <!-- Share Info -->
-                                                <div class="share-info">
-                                                    <!-- Share Icon -->
-                                                    <div class="share-icon">
-                                                        <a href="#"><i class="fa fa-play" aria-hidden="true"></i></a>
-                                                    </div>
-                                                </div>
+                                                <img class="second-thumbnail" src="media/{{nmotb.song_cover}}" alt="">
+                                
                                             </div>
                                             <div class="model-info">
                                                 <!-- <h3>Peter Alvarez</h3> -->
-                                                <h6>Song Title</h6>
+                                                <h6 style="text-align: center; color: white;" >{{nmotb.title}}</h6>
                                             </div>
                                         </div>
+                                        {% endfor %}
 
-                                        <!-- Single Model Item -->
-                                        <div class="single-model-item">
-                                            <div class="model-thumbnail">
-                                                <!-- First Thumbnail -->
-                                                <img class="first-thumbnail" src="cs.jpg" alt="">
-                                                <!-- Second Thumbnail -->
-                                                <img class="second-thumbnail" src="cs.jpg" alt="">
-                                                <!-- Share Info -->
-                                                <div class="share-info">
-                                                    <!-- Share Icon -->
-                                                    <div class="share-icon">
-                                                        <a href="#"><i class="fa fa-play" aria-hidden="true"></i></a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="model-info">
-                                                <!-- <h3>Peter Alvarez</h3> -->
-                                                <h6>Song Title</h6>
-                                            </div>
-                                        </div>
-
-                                        <!-- Single Model Item -->
-                                        <div class="single-model-item">
-                                            <div class="model-thumbnail">
-                                                <!-- First Thumbnail -->
-                                                <img class="first-thumbnail" src="cs.jpg" alt="">
-                                                <!-- Second Thumbnail -->
-                                                <img class="second-thumbnail" src="cs.jpg" alt="">
-                                                <!-- Share Info -->
-                                                <div class="share-info">
-                                                    <!-- Share Icon -->
-                                                    <div class="share-icon">
-                                                        <a href="#"><i class="fa fa-play" aria-hidden="true"></i></a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="model-info">
-                                                <!-- <h3>Peter Alvarez</h3> -->
-                                                <h6>Song Title</h6>
-                                            </div>
-                                        </div>
-
-                                        <!-- Single Model Item -->
-                                        <div class="single-model-item">
-                                            <div class="model-thumbnail">
-                                                <!-- First Thumbnail -->
-                                                <img class="first-thumbnail" src="cs.jpg" alt="">
-                                                <!-- Second Thumbnail -->
-                                                <img class="second-thumbnail" src="cs.jpg" alt="">
-                                                <!-- Share Info -->
-                                                <div class="share-info">
-                                                    <!-- Share Icon -->
-                                                    <div class="share-icon">
-                                                        <a href="#"><i class="fa fa-play" aria-hidden="true"></i></a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="model-info">
-                                                <!-- <h3>Peter Alvarez</h3> -->
-                                                <h6>Song Title</h6>
-                                            </div>
-                                        </div>
-                                        <!-- Single Model Item -->
-                                        <div class="single-model-item">
-                                            <div class="model-thumbnail">
-                                                <!-- First Thumbnail -->
-                                                <img class="first-thumbnail" src="cs.jpg" alt="">
-                                                <!-- Second Thumbnail -->
-                                                <img class="second-thumbnail" src="cs.jpg" alt="">
-                                                <!-- Share Info -->
-                                                <div class="share-info">
-                                                    <!-- Share Icon -->
-                                                    <div class="share-icon">
-                                                        <a href="#"><i class="fa fa-play" aria-hidden="true"></i></a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="model-info">
-                                                <!-- <h3>Peter Alvarez</h3> -->
-                                                <h6>Song Title</h6>
-                                            </div>
-                                        </div>
-
-                                        <!-- Single Model Item -->
-                                        <div class="single-model-item">
-                                            <div class="model-thumbnail">
-                                                <!-- First Thumbnail -->
-                                                <img class="first-thumbnail" src="cs.jpg" alt="">
-                                                <!-- Second Thumbnail -->
-                                                <img class="second-thumbnail" src="cs.jpg" alt="">
-                                                <!-- Share Info -->
-                                                <div class="share-info">
-                                                    <!-- Share Icon -->
-                                                    <div class="share-icon">
-                                                        <a href="#"><i class="fa fa-play" aria-hidden="true"></i></a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="model-info">
-                                                <!-- <h3>Peter Alvarez</h3> -->
-                                                <h6>Song Title</h6>
-                                            </div>
-                                        </div>
-
-                                        <!-- Single Model Item -->
-                                        <div class="single-model-item">
-                                            <div class="model-thumbnail">
-                                                <!-- First Thumbnail -->
-                                                <img class="first-thumbnail" src="cs.jpg" alt="">
-                                                <!-- Second Thumbnail -->
-                                                <img class="second-thumbnail" src="cs.jpg" alt="">
-                                                <!-- Share Info -->
-                                                <div class="share-info">
-                                                    <!-- Share Icon -->
-                                                    <div class="share-icon">
-                                                        <a href="#"><i class="fa fa-play" aria-hidden="true"></i></a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="model-info">
-                                                <!-- <h3>Peter Alvarez</h3> -->
-                                                <h6>Song Title</h6>
-                                            </div>
-                                        </div>
-
-                                        <!-- Single Model Item -->
-                                        <div class="single-model-item">
-                                            <div class="model-thumbnail">
-                                                <!-- First Thumbnail -->
-                                                <img class="first-thumbnail" src="cs.jpg" alt="">
-                                                <!-- Second Thumbnail -->
-                                                <img class="second-thumbnail" src="cs.jpg" alt="">
-                                                <!-- Share Info -->
-                                                <div class="share-info">
-                                                    <!-- Share Icon -->
-                                                    <div class="share-icon">
-                                                        <a href="#"><i class="fa fa-play" aria-hidden="true"></i></a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="model-info">
-                                                <!-- <h3>Peter Alvarez</h3> -->
-                                                <h6>Song Title</h6>
-                                            </div>
-                                        </div>
-
-                                        <!-- Single Model Item -->
-                                        <div class="single-model-item">
-                                            <div class="model-thumbnail">
-                                                <!-- First Thumbnail -->
-                                                <img class="first-thumbnail" src="cs.jpg" alt="">
-                                                <!-- Second Thumbnail -->
-                                                <img class="second-thumbnail" src="cs.jpg" alt="">
-                                                <!-- Share Info -->
-                                                <div class="share-info">
-                                                    <!-- Share Icon -->
-                                                    <div class="share-icon">
-                                                        <a href="#"><i class="fa fa-play" aria-hidden="true"></i></a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="model-info">
-                                                <!-- <h3>Peter Alvarez</h3> -->
-                                                <h6>Song Title</h6>
-                                            </div>
-                                        </div>
+                                      
 
 
                                     </div>
@@ -1270,12 +899,13 @@
 
 
                                         <!-- Single Model Item -->
+                                        {% for lc in latestcolabs %}
                                         <div class="single-model-item">
                                             <div class="model-thumbnail">
                                                 <!-- First Thumbnail -->
-                                                <img class="first-thumbnail" src="cs.jpg" alt="">
+                                                <img class="first-thumbnail" src="media/{{lc.song_cover}}" alt="">
                                                 <!-- Second Thumbnail -->
-                                                <img class="second-thumbnail" src="cs.jpg" alt="">
+                                                <img class="second-thumbnail" src="media/{{lc.song_cover}}" alt="">
                                                 <!-- Share Info -->
                                                 <div class="share-info">
                                                     <!-- Share Icon -->
@@ -1286,197 +916,12 @@
                                             </div>
                                             <div class="model-info">
                                                 <!-- <h3>Peter Alvarez</h3> -->
-                                                <h6>Song Title</h6>
+                                                <h6 style="text-align: center; color: white;">{{lc.title}}</h6>
                                             </div>
                                         </div>
+                                        {% endfor %}
 
-                                        <!-- Single Model Item -->
-                                        <div class="single-model-item">
-                                            <div class="model-thumbnail">
-                                                <!-- First Thumbnail -->
-                                                <img class="first-thumbnail" src="cs.jpg" alt="">
-                                                <!-- Second Thumbnail -->
-                                                <img class="second-thumbnail" src="cs.jpg" alt="">
-                                                <!-- Share Info -->
-                                                <div class="share-info">
-                                                    <!-- Share Icon -->
-                                                    <div class="share-icon">
-                                                        <a href="#"><i class="fa fa-play" aria-hidden="true"></i></a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="model-info">
-                                                <!-- <h3>Peter Alvarez</h3> -->
-                                                <h6>Song Title</h6>
-                                            </div>
-                                        </div>
-
-                                        <!-- Single Model Item -->
-                                        <div class="single-model-item">
-                                            <div class="model-thumbnail">
-                                                <!-- First Thumbnail -->
-                                                <img class="first-thumbnail" src="cs.jpg" alt="">
-                                                <!-- Second Thumbnail -->
-                                                <img class="second-thumbnail" src="cs.jpg" alt="">
-                                                <!-- Share Info -->
-                                                <div class="share-info">
-                                                    <!-- Share Icon -->
-                                                    <div class="share-icon">
-                                                        <a href="#"><i class="fa fa-play" aria-hidden="true"></i></a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="model-info">
-                                                <!-- <h3>Peter Alvarez</h3> -->
-                                                <h6>Song Title</h6>
-                                            </div>
-                                        </div>
-
-                                        <!-- Single Model Item -->
-                                        <div class="single-model-item">
-                                            <div class="model-thumbnail">
-                                                <!-- First Thumbnail -->
-                                                <img class="first-thumbnail" src="cs.jpg" alt="">
-                                                <!-- Second Thumbnail -->
-                                                <img class="second-thumbnail" src="cs.jpg" alt="">
-                                                <!-- Share Info -->
-                                                <div class="share-info">
-                                                    <!-- Share Icon -->
-                                                    <div class="share-icon">
-                                                        <a href="#"><i class="fa fa-play" aria-hidden="true"></i></a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="model-info">
-                                                <!-- <h3>Peter Alvarez</h3> -->
-                                                <h6>Song Title</h6>
-                                            </div>
-                                        </div>
-
-                                        <!-- Single Model Item -->
-                                        <div class="single-model-item">
-                                            <div class="model-thumbnail">
-                                                <!-- First Thumbnail -->
-                                                <img class="first-thumbnail" src="cs.jpg" alt="">
-                                                <!-- Second Thumbnail -->
-                                                <img class="second-thumbnail" src="cs.jpg" alt="">
-                                                <!-- Share Info -->
-                                                <div class="share-info">
-                                                    <!-- Share Icon -->
-                                                    <div class="share-icon">
-                                                        <a href="#"><i class="fa fa-play" aria-hidden="true"></i></a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="model-info">
-                                                <!-- <h3>Peter Alvarez</h3> -->
-                                                <h6>Song Title</h6>
-                                            </div>
-                                        </div>
-                                        <!-- Single Model Item -->
-                                        <div class="single-model-item">
-                                            <div class="model-thumbnail">
-                                                <!-- First Thumbnail -->
-                                                <img class="first-thumbnail" src="cs.jpg" alt="">
-                                                <!-- Second Thumbnail -->
-                                                <img class="second-thumbnail" src="cs.jpg" alt="">
-                                                <!-- Share Info -->
-                                                <div class="share-info">
-                                                    <!-- Share Icon -->
-                                                    <div class="share-icon">
-                                                        <a href="#"><i class="fa fa-play" aria-hidden="true"></i></a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="model-info">
-                                                <!-- <h3>Peter Alvarez</h3> -->
-                                                <h6>Song Title</h6>
-                                            </div>
-                                        </div>
-
-                                        <!-- Single Model Item -->
-                                        <div class="single-model-item">
-                                            <div class="model-thumbnail">
-                                                <!-- First Thumbnail -->
-                                                <img class="first-thumbnail" src="cs.jpg" alt="">
-                                                <!-- Second Thumbnail -->
-                                                <img class="second-thumbnail" src="cs.jpg" alt="">
-                                                <!-- Share Info -->
-                                                <div class="share-info">
-                                                    <!-- Share Icon -->
-                                                    <div class="share-icon">
-                                                        <a href="#"><i class="fa fa-play" aria-hidden="true"></i></a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="model-info">
-                                                <!-- <h3>Peter Alvarez</h3> -->
-                                                <h6>Song Title</h6>
-                                            </div>
-                                        </div>
-
-                                        <!-- Single Model Item -->
-                                        <div class="single-model-item">
-                                            <div class="model-thumbnail">
-                                                <!-- First Thumbnail -->
-                                                <img class="first-thumbnail" src="cs.jpg" alt="">
-                                                <!-- Second Thumbnail -->
-                                                <img class="second-thumbnail" src="cs.jpg" alt="">
-                                                <!-- Share Info -->
-                                                <div class="share-info">
-                                                    <!-- Share Icon -->
-                                                    <div class="share-icon">
-                                                        <a href="#"><i class="fa fa-play" aria-hidden="true"></i></a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="model-info">
-                                                <!-- <h3>Peter Alvarez</h3> -->
-                                                <h6>Song Title</h6>
-                                            </div>
-                                        </div>
-
-                                        <!-- Single Model Item -->
-                                        <div class="single-model-item">
-                                            <div class="model-thumbnail">
-                                                <!-- First Thumbnail -->
-                                                <img class="first-thumbnail" src="cs.jpg" alt="">
-                                                <!-- Second Thumbnail -->
-                                                <img class="second-thumbnail" src="cs.jpg" alt="">
-                                                <!-- Share Info -->
-                                                <div class="share-info">
-                                                    <!-- Share Icon -->
-                                                    <div class="share-icon">
-                                                        <a href="#"><i class="fa fa-play" aria-hidden="true"></i></a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="model-info">
-                                                <!-- <h3>Peter Alvarez</h3> -->
-                                                <h6>Song Title</h6>
-                                            </div>
-                                        </div>
-
-                                        <!-- Single Model Item -->
-                                        <div class="single-model-item">
-                                            <div class="model-thumbnail">
-                                                <!-- First Thumbnail -->
-                                                <img class="first-thumbnail" src="cs.jpg" alt="">
-                                                <!-- Second Thumbnail -->
-                                                <img class="second-thumbnail" src="cs.jpg" alt="">
-                                                <!-- Share Info -->
-                                                <div class="share-info">
-                                                    <!-- Share Icon -->
-                                                    <div class="share-icon">
-                                                        <a href="#"><i class="fa fa-play" aria-hidden="true"></i></a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="model-info">
-                                                <!-- <h3>Peter Alvarez</h3> -->
-                                                <h6>Song Title</h6>
-                                            </div>
-                                        </div>
+                             
 
 
                                     </div>
@@ -1518,12 +963,13 @@
 
 
                                         <!-- Single Model Item -->
+                                        {% for atlf in albumstolookoutfor %}
                                         <div class="single-model-item">
                                             <div class="model-thumbnail">
                                                 <!-- First Thumbnail -->
-                                                <img class="first-thumbnail" src="cs.jpg" alt="">
+                                                <img class="first-thumbnail" src="media/{{atlf.song_cover}}" alt="">
                                                 <!-- Second Thumbnail -->
-                                                <img class="second-thumbnail" src="cs.jpg" alt="">
+                                                <img class="second-thumbnail" src="media/{{atlf.song_cover}}" alt="">
                                                 <!-- Share Info -->
                                                 <div class="share-info">
                                                     <!-- Share Icon -->
@@ -1534,197 +980,10 @@
                                             </div>
                                             <div class="model-info">
                                                 <!-- <h3>Peter Alvarez</h3> -->
-                                                <h6>Song Title</h6>
+                                                <h6 style="text-align: center; color: white;" >{{atlf.title}}</h6>
                                             </div>
                                         </div>
-
-                                        <!-- Single Model Item -->
-                                        <div class="single-model-item">
-                                            <div class="model-thumbnail">
-                                                <!-- First Thumbnail -->
-                                                <img class="first-thumbnail" src="cs.jpg" alt="">
-                                                <!-- Second Thumbnail -->
-                                                <img class="second-thumbnail" src="cs.jpg" alt="">
-                                                <!-- Share Info -->
-                                                <div class="share-info">
-                                                    <!-- Share Icon -->
-                                                    <div class="share-icon">
-                                                        <a href="#"><i class="fa fa-play" aria-hidden="true"></i></a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="model-info">
-                                                <!-- <h3>Peter Alvarez</h3> -->
-                                                <h6>Song Title</h6>
-                                            </div>
-                                        </div>
-
-                                        <!-- Single Model Item -->
-                                        <div class="single-model-item">
-                                            <div class="model-thumbnail">
-                                                <!-- First Thumbnail -->
-                                                <img class="first-thumbnail" src="cs.jpg" alt="">
-                                                <!-- Second Thumbnail -->
-                                                <img class="second-thumbnail" src="cs.jpg" alt="">
-                                                <!-- Share Info -->
-                                                <div class="share-info">
-                                                    <!-- Share Icon -->
-                                                    <div class="share-icon">
-                                                        <a href="#"><i class="fa fa-play" aria-hidden="true"></i></a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="model-info">
-                                                <!-- <h3>Peter Alvarez</h3> -->
-                                                <h6>Song Title</h6>
-                                            </div>
-                                        </div>
-
-                                        <!-- Single Model Item -->
-                                        <div class="single-model-item">
-                                            <div class="model-thumbnail">
-                                                <!-- First Thumbnail -->
-                                                <img class="first-thumbnail" src="cs.jpg" alt="">
-                                                <!-- Second Thumbnail -->
-                                                <img class="second-thumbnail" src="cs.jpg" alt="">
-                                                <!-- Share Info -->
-                                                <div class="share-info">
-                                                    <!-- Share Icon -->
-                                                    <div class="share-icon">
-                                                        <a href="#"><i class="fa fa-play" aria-hidden="true"></i></a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="model-info">
-                                                <!-- <h3>Peter Alvarez</h3> -->
-                                                <h6>Song Title</h6>
-                                            </div>
-                                        </div>
-
-                                        <!-- Single Model Item -->
-                                        <div class="single-model-item">
-                                            <div class="model-thumbnail">
-                                                <!-- First Thumbnail -->
-                                                <img class="first-thumbnail" src="cs.jpg" alt="">
-                                                <!-- Second Thumbnail -->
-                                                <img class="second-thumbnail" src="cs.jpg" alt="">
-                                                <!-- Share Info -->
-                                                <div class="share-info">
-                                                    <!-- Share Icon -->
-                                                    <div class="share-icon">
-                                                        <a href="#"><i class="fa fa-play" aria-hidden="true"></i></a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="model-info">
-                                                <!-- <h3>Peter Alvarez</h3> -->
-                                                <h6>Song Title</h6>
-                                            </div>
-                                        </div>
-                                        <!-- Single Model Item -->
-                                        <div class="single-model-item">
-                                            <div class="model-thumbnail">
-                                                <!-- First Thumbnail -->
-                                                <img class="first-thumbnail" src="cs.jpg" alt="">
-                                                <!-- Second Thumbnail -->
-                                                <img class="second-thumbnail" src="cs.jpg" alt="">
-                                                <!-- Share Info -->
-                                                <div class="share-info">
-                                                    <!-- Share Icon -->
-                                                    <div class="share-icon">
-                                                        <a href="#"><i class="fa fa-play" aria-hidden="true"></i></a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="model-info">
-                                                <!-- <h3>Peter Alvarez</h3> -->
-                                                <h6>Song Title</h6>
-                                            </div>
-                                        </div>
-
-                                        <!-- Single Model Item -->
-                                        <div class="single-model-item">
-                                            <div class="model-thumbnail">
-                                                <!-- First Thumbnail -->
-                                                <img class="first-thumbnail" src="cs.jpg" alt="">
-                                                <!-- Second Thumbnail -->
-                                                <img class="second-thumbnail" src="cs.jpg" alt="">
-                                                <!-- Share Info -->
-                                                <div class="share-info">
-                                                    <!-- Share Icon -->
-                                                    <div class="share-icon">
-                                                        <a href="#"><i class="fa fa-play" aria-hidden="true"></i></a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="model-info">
-                                                <!-- <h3>Peter Alvarez</h3> -->
-                                                <h6>Song Title</h6>
-                                            </div>
-                                        </div>
-
-                                        <!-- Single Model Item -->
-                                        <div class="single-model-item">
-                                            <div class="model-thumbnail">
-                                                <!-- First Thumbnail -->
-                                                <img class="first-thumbnail" src="cs.jpg" alt="">
-                                                <!-- Second Thumbnail -->
-                                                <img class="second-thumbnail" src="cs.jpg" alt="">
-                                                <!-- Share Info -->
-                                                <div class="share-info">
-                                                    <!-- Share Icon -->
-                                                    <div class="share-icon">
-                                                        <a href="#"><i class="fa fa-play" aria-hidden="true"></i></a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="model-info">
-                                                <!-- <h3>Peter Alvarez</h3> -->
-                                                <h6>Song Title</h6>
-                                            </div>
-                                        </div>
-
-                                        <!-- Single Model Item -->
-                                        <div class="single-model-item">
-                                            <div class="model-thumbnail">
-                                                <!-- First Thumbnail -->
-                                                <img class="first-thumbnail" src="cs.jpg" alt="">
-                                                <!-- Second Thumbnail -->
-                                                <img class="second-thumbnail" src="cs.jpg" alt="">
-                                                <!-- Share Info -->
-                                                <div class="share-info">
-                                                    <!-- Share Icon -->
-                                                    <div class="share-icon">
-                                                        <a href="#"><i class="fa fa-play" aria-hidden="true"></i></a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="model-info">
-                                                <!-- <h3>Peter Alvarez</h3> -->
-                                                <h6>Song Title</h6>
-                                            </div>
-                                        </div>
-
-                                        <!-- Single Model Item -->
-                                        <div class="single-model-item">
-                                            <div class="model-thumbnail">
-                                                <!-- First Thumbnail -->
-                                                <img class="first-thumbnail" src="cs.jpg" alt="">
-                                                <!-- Second Thumbnail -->
-                                                <img class="second-thumbnail" src="cs.jpg" alt="">
-                                                <!-- Share Info -->
-                                                <div class="share-info">
-                                                    <!-- Share Icon -->
-                                                    <div class="share-icon">
-                                                        <a href="#"><i class="fa fa-play" aria-hidden="true"></i></a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="model-info">
-                                                <!-- <h3>Peter Alvarez</h3> -->
-                                                <h6>Song Title</h6>
-                                            </div>
-                                        </div>
+                                        {% endfor %}
 
 
                                     </div>
@@ -1861,7 +1120,7 @@
         </div>
     </section>
     <!-- ***** CTA Area End ***** -->
-
+    {% endif %}
     <!-- ***** Footer Area Start ***** -->
     <footer class="footer-area section-padding-80-0" style="background-color: rgba(19, 18, 18, 0.993);">
         <div class="container">
@@ -1878,7 +1137,7 @@
                         <h4 class="widget-title" style="color: white;">Contacts</h4>
                         <!-- Footer Content -->
                         <div class="footer-content mb-30">
-                            <h4>0800-Spicy Tv</h4>
+                            <h4>0800-FunRadio</h4>
                             <h6>somewhere in lagos</h6>
                         </div>
                         <!-- Social Info -->
@@ -1922,7 +1181,7 @@
                     <div class="single-footer-widget mb-60">
                         <!-- Logo -->
                         <a href="#" class="d-block mb-4">
-                            <h3 class="text-primary">Spicy Tv</h3>
+                            <h3 class="text-primary">Funradio</h3>
                         </a>
                         <!-- <p>Integer vehicula mauris libero, at molestie eros imperdiet sit amet. Suspendisse mattis ante sit amet ante.</p> -->
                         <div class="copywrite-text">
@@ -1939,6 +1198,7 @@
             </div>
         </div>
     </footer>
+
     <!-- ***** Footer Area End ***** -->
 
     <!-- ******* All JS ******* -->
@@ -1959,16 +1219,10 @@
 
 
     <Script>
-
-        // var audio = document.getElementById('demo');
-        // var play = document.getElementById('play');
-        // var pause = document.getElementById('pause');
-        // audio.play();
-
-
-
-
-
+        var audio = document.getElementById('demo');
+        var play = document.getElementById('play');
+        var pause = document.getElementById('pause');
+        audio.play();
 
 
 
@@ -1990,14 +1244,6 @@
         $(document).ready(function () {
             $('img[alt="song img"]').hide();
 
-
-            $("#caret-down").click(function () {
-                opac();
-                $("#show-song").toggle("slow", function () {
-                    // Animation complete.
-                });
-            });
-
             ////////////////////////////////////////////////
 
             $('#userNav').hide("slide", { direction: "left" }, 1000);
@@ -2006,34 +1252,7 @@
                 $('img[alt="song img"]').show(2000);
             });
 
-
-            ////////////////////////////////////////////////
-            // $('.mona-model-area1').hide();
-            // $(".mona-tab-content1").hide(); 
-
-            //     $('#arrow-left').toggle('slide', {
-            //     direction: 'left'
-            // }, 1000);
-            // $(".mona-model-area").hide(2000);
-            // $(".mona-model-area1").show(2000);
-
-            // $('#arrow-left').click(function () {
-            //   $(".mona-tab-content").animate({ left: "-100%" }, 500);
-            //   $(".mona-tab-content1").show('slide', { direction: 'right' }, 2000);
-
-
-            // });
-
         });
-
-
-
-
-
-
-
-
-
 
     </Script>
 
