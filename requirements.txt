@@ -21,7 +21,3 @@ toml==0.10.2
 untokenize==0.1.1
 whitenoise==5.3.0
 wrapt==1.12.1
-
-# https://www.youtube.com/watch?v=5d8AQFF0Ot0 --- first
-
-# https://www.youtube.com/watch?v=G-MtZan4kis ---second
