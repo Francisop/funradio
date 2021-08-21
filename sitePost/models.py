@@ -12,16 +12,6 @@ class CollectionsToLookoutFor(models.Model):
     
     def __str__(self):
         return self.title
-
-
-class NewMusicTOLookoutFor(models.Model):
-    song_cover = models.ImageField(upload_to = "siteImages/NewMusicTOLookoutFor/")
-    title = models.CharField(max_length=200)
-    
-    objects = models.Manager()
-    
-    def __str__(self):
-        return self.title
     
 
 class NewMusicOnTheBlock(models.Model):
@@ -35,7 +25,7 @@ class NewMusicOnTheBlock(models.Model):
         return self.title
 
 
-class LatestCollabs(models.Model):
+class EventsInTheCity(models.Model):
     song_cover = models.ImageField(upload_to = "siteImages/LatestCollabs/")
     title = models.CharField(max_length=200)
     
@@ -45,7 +35,7 @@ class LatestCollabs(models.Model):
         return self.title
 
 
-class AlbumsToLookoutFor(models.Model):
+class LatestAlbums(models.Model):
     song_cover = models.ImageField(upload_to = "siteImages/AlbumsToLookoutFor/")
     title = models.CharField(max_length=200)
     
@@ -69,6 +59,8 @@ class Song(models.Model):
     song_title = models.CharField(max_length=200)
     artist = models.CharField(max_length=300)
     audio = models.FileField(upload_to="songs/")
+    artist_image = models.ImageField(upload_to = "siteImages/song-image/")
+    artist_desc = models.CharField(max_length=600)
     
     objects = models.Manager()
     randomise = SongManager()

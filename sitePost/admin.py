@@ -1,10 +1,9 @@
 from django.contrib import admin
-from sitePost.models import (AlbumsToLookoutFor,CollectionsToLookoutFor,LatestCollabs,NewMusicOnTheBlock,NewMusicTOLookoutFor,Song)
+from sitePost.models import (CollectionsToLookoutFor, LatestAlbums, EventsInTheCity, NewMusicOnTheBlock,Song)
 
 # Register your models here.
-admin.site.register(AlbumsToLookoutFor)
+admin.site.register(LatestAlbums)
 admin.site.register(CollectionsToLookoutFor)
-admin.site.register(LatestCollabs)
+admin.site.register(EventsInTheCity)
 admin.site.register(NewMusicOnTheBlock)
-admin.site.register(NewMusicTOLookoutFor)
 admin.site.register(Song)

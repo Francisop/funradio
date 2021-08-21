@@ -16,6 +16,7 @@
 
     <!-- Core Stylesheet -->
     <link href="{% static 'style.css' %}" rel="stylesheet">
+    <link href="{% static 'css/login.css' %}" rel="stylesheet">
 
     <style>
         .new {
@@ -93,7 +94,7 @@
                                         {% csrf_token %}
                                         <input type="hidden" value="logout">
 
-                                        <button type="submit" name="" class="btn btn-block">Logout</button>
+                                        <button type="submit" name="" class="btn btn-block">Log Out</button>
                                     </form>
                                 </li>
                                 {% else %}
@@ -184,15 +185,15 @@
         <div class="modal fade" id="modelId" tabindex="-1" role="dialog" aria-labelledby="modelTitleId"
             aria-hidden="true">
             <div class="modal-dialog" role="document">
-                <div class="modal-content" style="background-image: linear-gradient(to right,purple,blue);">
+                <div class="modal-content" style="background-color: #000000;">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true" style="font-size: 70px; color: white;">&times;</span>
                     </button>
-                    <div class="modal-body row" style="background-image: linear-gradient(purple,blue);;">
+                    <div class="modal-body row" style="background-color: #000000;">
 
 
                         <div class="col-6">
-                            <img src=" {% static 'img/funradio.png' %}   " alt="funradio"
+                            <img src=" {% static 'img/funradio.png' %}  " alt="funradio"
                                 style="width: 100%; padding: 0; margin: 0;">
 
                             <div
@@ -227,7 +228,8 @@
                                 </div>
                                 <div>
 
-                                    <img id="song-img" src="   {% static 'img/17.jpg' %}" alt="song img">
+                                    <img id="song-img" src="media/{{song.artist_image}}" style="opacity: 0.6;"
+                                        alt="song img">
                                     <br>
                                     <p style="color: aliceblue;">
                                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{song.artist}}
@@ -261,7 +263,53 @@
                 </div>
             </div>
         </div>
+        <!--*********** END of FUN RDIO Modals ************************-->
 
+
+
+        <!--*********** More-Details Modals ************************-->
+
+        <div class="modal fade" id="gallerymodal" tabindex="-1" role="dialog" aria-labelledby="modelTitleId"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content" style="background-color: #000000;">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true" style="font-size: 70px; color: white;">&times;</span>
+                    </button>
+                    <div class="modal-body row" style="background-color: #000000;">
+                        <div class="col-3"
+                            style=" background-size: cover;background-position: center;background-repeat: no-repeat; background-image: url('{% static 'img/login1.jpg' %}');">
+                        </div>
+                        <div class="col-3"
+                            style=" background-size: cover;background-position: center;background-repeat: no-repeat; background-image: url('{% static 'img/login2.jpg' %}');">
+                        </div>
+                        <div class="col-3"
+                            style=" background-size: cover;background-position: center;background-repeat: no-repeat; background-image: url('{% static 'img/login3.jpg' %}');">
+                        </div>
+                        <div class="col-3"
+                            style=" background-size: cover;background-position: center;background-repeat: no-repeat; background-image: url('{% static 'img/login4.jpg' %}');">
+                        </div>
+                        <div class="col-3"
+                            style=" background-size: cover;background-position: center;background-repeat: no-repeat; background-image: url('{% static 'img/login5.jpg' %}');">
+                        </div>
+                        <div class="col-3"
+                            style=" background-size: cover;background-position: center;background-repeat: no-repeat; background-image: url('{% static 'img/login6.jpg' %}');">
+                        </div>
+                        <div class="col-3"
+                            style=" background-size: cover;background-position: center;background-repeat: no-repeat; background-image: url('{% static 'img/login7.jpg' %}');">
+                        </div>
+                        <div class="col-3"
+                            style=" background-size: cover;background-position: center;background-repeat: no-repeat; background-image: url('{% static 'img/login8.jpg' %}');">
+                        </div>
+
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--*********** END More Details Modals ************************-->
 
 
 
@@ -270,86 +318,68 @@
             aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
+                    <div class="login">
+
+                        <div class="login-container">
+                            <button type="button" class="close" style="border: none; padding-right: 20px;"
+                                data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true" style="font-size: 70px;">&times;</span>
+                            </button>
+
+                            <div class="login-row">
+                                <div class="login-area">
+                                    <h3 style="color: white;"> <b> Welcome back🎵🎵 </b> </h3>
+                                    <p style="font-size: 16px;" class="text-light">Let The Fun Begin 🎉🎉🙌
+                                    <p>
+                                        <br>
+
+                                    <form method="POST">
+                                        {% csrf_token%}
+
+                                        <input type="hidden" name="method" value="login">
+
+                                        <div class="form-group">
+                                            <label for=""><b>Email address </b> </label>
+                                            <input type="text" class="form-control" name="email-000" id=""
+                                                aria-describedby="helpId" placeholder="example@example.com">
+                                        </div>
 
 
-                    <style>
-                        .login-row {
-                            background: rgba(255, 255, 255, 0.322);
-                            height: 100%;
-                            width: 50%;
-                            margin: auto;
-                            border-radius: 20px;
-                        }
+                                        <div class="form-group">
+                                            <label for=""> <b> Password </b> </label>
+                                            <input type="password" class="form-control" name="password-000" id=""
+                                                aria-describedby="helpId" placeholder="*********">
+                                        </div>
+                                        <br>
 
-                        .login-container {
-                            background-image: linear-gradient(to top, purple, blue);
-                            height: 100vh;
-                            padding-bottom: 30px;
-                            padding-top: 30px;
-                            /* overflow: hidden; */
+                                        <button type="submit" name="" style="width: 100%; margin: auto;" id=""
+                                            class="btn btn-dark" btn-lg btn-block>Sign-up</button>
+                                        <p style="float: right;"><a href="register.html"
+                                                style=" font-size: 15px; color: white;"><b>Forgot
+                                                    password</b></a>
+                                        </p>
+                                        <div style="clear: both;"></div>
+                                        <p style="   font-size: 15px;   text-align: center; color: white;"> don't have
+                                            an account <a href="register.html"
+                                                style="font-size: 15px;color: white;"><b>Create account</b></a></p>
+                                    </form>
 
-                        }
-
-                        .login-img {
-                            height: 100%;
-                            width: 100%;
-                            background-image: url(login-img.jpg);
-                            background-position: center;
-                            background-size: contain;
-                            border-radius: 20px;
-
-                        }
-
-
-                        .login-area {
-                            padding: 20px;
-                        }
-                    </style>
-                    <div class="login-container">
-                        <button type="button" class="close" style="border: none; padding-right: 20px;"
-                            data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true" style="font-size: 70px;">&times;</span>
-                        </button>
-
-                        <div class="login-row">
-                            <div class="login-area">
-                                <h3> <b> Welcome back🎵🎵 </b> </h3>
-                                <p class="text-dark">Let The Fun Begin 🎉🎉🙌
-                                <p>
-                                    <br>
-
-                                <form method="POST">
-                                    {% csrf_token%}
-
-                                    <input type="hidden" name="method" value="login">
-
-                                    <div class="form-group">
-                                        <label for=""><b>Email address </b> </label>
-                                        <input type="text" class="form-control" name="email-000" id=""
-                                            aria-describedby="helpId" placeholder="example@example.com">
-                                    </div>
-
-
-                                    <div class="form-group">
-                                        <label for=""> <b> Password </b> </label>
-                                        <input type="password" class="form-control" name="password-000" id=""
-                                            aria-describedby="helpId" placeholder="*********">
-                                    </div>
-                                    <br>
-
-                                    <button type="submit" name="" style="width: 100%; margin: auto;" id=""
-                                        class="btn btn-dark" btn-lg btn-block>Sign-up</button>
-                                    <p style="float: right;"><a href="register.html" style="color: black;"><b>Forgot
-                                                password</b></a>
-                                    </p>
-                                    <div style="clear: both;"></div>
-                                    <p style="text-align: center; color: black;"> don't have an account <a
-                                            href="register.html" style="color: black;"><b>Create account</b></a></p>
-                                </form>
-
+                                </div>
                             </div>
                         </div>
                     </div>
+                    <div class="slideshow">
+                        <div class="slideshow-image" style="background-image: url('{% static 'img/login2.jpg' %}')">
+                        </div>
+                        <div class="slideshow-image" style="background-image: url('{% static 'img/login3.jpg' %}')">
+                        </div>
+                        <div class="slideshow-image" style="background-image: url('{% static 'img/login1.jpg' %}')">
+                        </div>
+                        <div class="slideshow-image" style="background-image: url('{% static 'img/login5.jpg' %}')">
+                        </div>
+                    </div>
+
+
                 </div>
             </div>
         </div>
@@ -364,92 +394,72 @@
 
 
                 <div class="modal-content">
+                    <div class="login">
+                        <div class="signup-container">
+                            <button type="button" class="close" style="border: none; padding-right: 20px;"
+                                data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true" style="font-size: 70px;">&times;</span>
+                            </button>
+                            <div class=" signup-row ">
+                                <div class="signup-area">
+                                    <h3 class="text-light"> <b> Create an account</b></h3>
+                                    <p class="text-light">Signup and listen to some good music
+                                    <p>
 
-                    <style>
-                        .signup-row {
-                            background: rgba(255, 255, 255, 0.322);
-                            height: 100%;
-                            width: 50%;
-                            margin: auto;
-                            border-radius: 20px;
-                        }
+                                    <form method="POST">
+                                        {% csrf_token%}
 
-                        .signup-container {
-                            background-image: linear-gradient(to top, purple, blue);
-                            height: 100vh;
-                            padding-bottom: 30px;
-                            padding-top: 30px;
-                            /* overflow: hidden; */
+                                        <input type="hidden" name="method" value="register">
 
-                        }
-
-                        .signup-img {
-                            height: 100%;
-                            width: 100%;
-                            background-image: url(login-img.jpg);
-                            background-position: center;
-                            background-size: contain;
-                            border-radius: 20px;
-
-                        }
+                                        <div class="form-group">
+                                            <label for=""><b>Fullname</b> </label>
+                                            <input type="text" class="form-control" name="name-000" id=""
+                                                aria-describedby="helpId" placeholder=" e.g. kelvin Joseph">
+                                        </div>
 
 
-                        .signup-area {
-                            padding: 20px;
-                        }
-                    </style>
-                    <div class="signup-container">
-                        <button type="button" class="close" style="border: none; padding-right: 20px;"
-                            data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true" style="font-size: 70px;">&times;</span>
-                        </button>
-                        <div class=" signup-row ">
-                            <div class="signup-area">
-                                <h3> <b> Create an account</b></h3>
-                                <p class="text-dark">Signup and listen to some goood tunes🙌
-                                <p>
+                                        <div class="form-group">
+                                            <label for=""><b>Email address </b> </label>
+                                            <input type="email" class="form-control" name="email-000" id=""
+                                                aria-describedby="helpId" placeholder="example@example.com">
+                                        </div>
 
-                                <form method="POST">
-                                    {% csrf_token%}
+                                        <div class="form-group">
+                                            <label for=""> <b> Password </b> </label>
+                                            <input type="password" class="form-control" name="password-000" id=""
+                                                aria-describedby="helpId" placeholder="************">
+                                        </div>
+                                        <br>
 
-                                    <input type="hidden" name="method" value="register">
-
-                                    <div class="form-group">
-                                        <label for=""><b>Fullname</b> </label>
-                                        <input type="text" class="form-control" name="name-000" id=""
-                                            aria-describedby="helpId" placeholder=" e.g. Songgod">
-                                    </div>
+                                        <button type="submit" name="" style="width: 100%; margin: auto;" id=""
+                                            class="btn btn-dark" btn-lg btn-block>Sign-up</button>
+                                        <p style="float: right;"> <span class="text-light"> Already have an account
+                                            </span>
+                                            <a href="login.html" style="color: white;"><b>Sign-in</b></a>
+                                        </p>
+                                    </form>
 
 
-                                    <div class="form-group">
-                                        <label for=""><b>Email address </b> </label>
-                                        <input type="email" class="form-control" name="email-000" id=""
-                                            aria-describedby="helpId" placeholder="example@example.com">
-                                    </div>
 
-                                    <div class="form-group">
-                                        <label for=""> <b> Password </b> </label>
-                                        <input type="password" class="form-control" name="password-000" id=""
-                                            aria-describedby="helpId" placeholder="************">
-                                    </div>
-                                    <br>
-
-                                    <button type="submit" name="" style="width: 100%; margin: auto;" id=""
-                                        class="btn btn-dark" btn-lg btn-block>Sign-up</button>
-                                    <p style="float: right;"> <span class="text-dark"> Already have an account </span>
-                                        <a href="login.html" style="color: black;"><b>Signin</b></a>
-                                    </p>
-                                </form>
-
-
+                                </div>
 
                             </div>
 
+
+
                         </div>
-
-
-
                     </div>
+                    <div class="slideshow">
+                        <div class="slideshow-image" style="background-image: url('{% static 'img/login4.jpg' %}')">
+                        </div>
+                        <div class="slideshow-image" style="background-image: url('{% static 'img/login6.jpg' %}')">
+                        </div>
+                        <div class="slideshow-image" style="background-image: url('{% static 'img/login3.jpg' %}')">
+                        </div>
+                        <div class="slideshow-image" style="background-image: url('{% static 'img/login1.jpg' %}')">
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>
@@ -480,9 +490,12 @@
                             <div class="welcome-text">
                                 <h2 data-animation="bounceInUp" data-delay="400ms" class="text-white">FIREBOY DML</h2>
                                 <h5 data-animation="bounceInUp" data-delay="600ms">APOLLO 2020</h5>
-                                <a href="more-details.html" class="btn bg-white" data-animation="bounceInUp"
+                                <button type="button" name="" data-toggle="modal" data-target="#gallerymodal"
+                                    data-animation="bounceInUp" data-delay="800ms" class="btn bg-whitek">More
+                                    Details <i class="arrow_right"></i></button>
+                                <!-- <a href="more-details.html" class="btn bg-white" data-animation="bounceInUp"
                                     data-delay="800ms">More
-                                    Details <i class="arrow_right"></i></a>
+                                    Details <i class="arrow_right"></i></a> -->
                             </div>
                         </div>
                     </div>
@@ -496,7 +509,7 @@
         </div> -->
                 <!-- Pager -->
                 <div class="slide-pager">
-                    <a href="#">Next: ITORO</a>
+                    <a href="#">Next: WIZKID</a>
                 </div>
             </div>
 
@@ -515,9 +528,12 @@
                                 <h2 data-animation="bounceInUp" data-delay="400ms" class="text-white">WIZKID</h2>
                                 <h5 data-animation="bounceInUp" data-delay="600ms" class="text-white">Made In Lagos 2020
                                 </h5>
-                                <a href="more-details.html" class="btn bg-white" data-animation="bounceInUp"
+                                <button type="button" name="" data-toggle="modal" data-target="#gallerymodal"
+                                    data-animation="bounceInUp" data-delay="800ms" class="btn bg-whitek">More
+                                    Details <i class="arrow_right"></i></button>
+                                <!-- <a href="more-details.html" class="btn bg-white" data-animation="bounceInUp"
                                     data-delay="800ms">More
-                                    Details <i class="arrow_right"></i></a>
+                                    Details <i class="arrow_right"></i></a> -->
                             </div>
                         </div>
                     </div>
@@ -531,7 +547,7 @@
         </div> -->
                 <!-- Pager -->
                 <div class="slide-pager">
-                    <a href="#">Next: Stolen</a>
+                    <a href="#">Next: TEMS</a>
                 </div>
             </div>
 
@@ -550,9 +566,13 @@
                                 <h2 data-animation="bounceInUp" data-delay="400ms" class="text-white">TEMS</h2>
                                 <h5 data-animation="bounceInUp" data-delay="600ms" class="text-white">For Broken Ears
                                     2020, EP</h5>
-                                <a href="more-details.html" class="btn bg-white" data-animation="bounceInUp"
+                                <button type="button" name="" data-toggle="modal" data-target="#gallerymodal"
+                                    data-animation="bounceInUp" data-delay="800ms" class="btn bg-whitek">More
+                                    Details <i class="arrow_right"></i></button>
+
+                                <!-- <a href="more-details.html" class="btn bg-white" data-animation="bounceInUp"
                                     data-delay="800ms">More
-                                    Details <i class="arrow_right"></i></a>
+                                    Details <i class="arrow_right"></i></a> -->
                             </div>
                         </div>
                     </div>
@@ -566,7 +586,7 @@
         </div> -->
                 <!-- Pager -->
                 <div class="slide-pager">
-                    <a href="#">Next: Jesse Edwards</a>
+                    <a href="#">Next: FIREBOY</a>
                 </div>
             </div>
 
@@ -582,50 +602,152 @@
     <!-- ***** About Us Area Start ***** -->
     {% if currentUser %}
     <section class="mona-about-us-area mb-30 section-padding-80-0" style="background-color: rgb(17, 17, 17);">
+        <!-- ///////////////////////////////////////////////////////////////////////////// -->
+
+
+        <style>
+            .flip-card {
+                background-color: transparent;
+                width: 100%;
+                height: 50%;
+                perspective: 1000px;
+            }
+
+            .flip-card-inner {
+                position: relative;
+                width: 100%;
+                height: 100%;
+                text-align: center;
+                transition: transform 0.6s;
+                transform-style: preserve-3d;
+                box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+            }
+
+            .flip-card:hover .flip-card-inner {
+                transform: rotateY(180deg);
+            }
+
+            .flip-card-front,
+            .flip-card-back {
+                position: absolute;
+                width: 100%;
+                height: 75%;
+                -webkit-backface-visibility: hidden;
+                backface-visibility: hidden;
+            }
+
+            .flip-card-front {
+                /* background-color: #bbb; */
+                color: black;
+            }
+
+            .flip-card-back {
+                background-color: #000000;
+                color: white;
+                transform: rotateY(180deg);
+            }
+        </style>
+
+
+
+        <!-- ///////////////////////////////////////////////////////////////////////////// -->
+
 
         <div class="container">
             <div class="row">
 
                 <!-- About Us Thumbnail -->
                 <div class="col-12 col-sm-6 col-lg-4">
-                    <div class="about-us-thumbnail mb-50 wow fadeInUp" data-wow-delay="100ms">
-                        <span class="line"></span>
-                        <img src="      {% static 'img/16.png' %} " alt="">
-                        <span class="line2"></span>
+                    <div class="flip-card">
+                        <div class="flip-card-inner">
+                            <div class="about-us-thumbnail mb-25 wow fadeInUp flip-card-front" data-wow-delay="100ms">
+                                <span class="line"></span>
+                                <img src="      {% static 'img/16.png' %} " alt="">
+                                <span class="line2"></span>
+                            </div>
+
+                            <div class="flip-card-back">
+                                <h1 class="text-white">Burna Boy</h1>
+                                <p>Whats Hot 🔥</p>
+                                <p>Burna Boy has won the Best International Act Award at the 2021 BET Awards ceremony
+                                    held last night at the Microsoft Theater in Los Angeles. </p>
+                            </div>
+
+                        </div>
                     </div>
 
-                    <div class="about-us-thumbnail mb-50 wow fadeInUp" data-wow-delay="100ms">
-                        <span class="line"></span>
-                        <img src="   {% static 'img/16a.jpg' %} " alt="">
-                        <span class="line2"></span>
+
+                    <div class="flip-card">
+                        <div class="flip-card-inner">
+                            <div class="about-us-thumbnail mb-50 wow fadeInUp flip-card-front" data-wow-delay="100ms">
+                                <span class="line"></span>
+                                <img src="   {% static 'img/16a.jpg' %} " alt="">
+                                <span class="line2"></span>
+                            </div>
+
+                            <div class="flip-card-back">
+                                <h1 style="color: white;">Davido</h1>
+                                <p>Whats Hot 🔥</p>
+                                <p>Davido has released the video to his 2020 single "Shopping Spree" featuring U.S.
+                                    artists Chris Brown and Young Thug.</p>
+                            </div>
+
+                        </div>
                     </div>
+
+
+
                 </div>
+
 
                 <!-- About Us Thumbnail -->
                 <div class="col-12 col-sm-6 col-lg-4">
-                    <div class="about-us-thumbnail mb-50 wow fadeInUp" data-wow-delay="400ms">
-                        <span class="line"></span>
-                        <img src="  {% static 'img/17.jpg' %} " alt="">
-                        <span class="line2"></span>
+                    <div class="flip-card">
+                        <div class="flip-card-inner">
+                            <div class="about-us-thumbnail mb-50 wow fadeInUp flip-card-front" data-wow-delay="100ms">
+                                <span class="line"></span>
+                                <img src="   {% static 'img/17.jpg' %} " style="height: 100%;" alt="">
+                                <span class="line2"></span>
+                            </div>
+
+                            <div class="flip-card-back">
+                                <h1 style="color: white;" >Omah Lay</h1>
+                                <p>Whats Hot 🔥</p>
+                                <p>Nigerian singer Tems has accused Ugandan singer Bebe Cool of getting her and Omah Lay
+                                    arrested by the police in Uganda.</p>
+                            </div>
+
+                        </div>
                     </div>
 
-                    <div class="about-us-thumbnail mb-50 wow fadeInUp" data-wow-delay="400ms">
-                        <span class="line"></span>
-                        <img src=" {% static 'img/17a.jpg' %} " alt="">
-                        <span class="line2"></span>
+
+                    <div class="flip-card">
+                        <div class="flip-card-inner">
+                            <div class="about-us-thumbnail mb-50 wow fadeInUp flip-card-front" data-wow-delay="100ms">
+                                <span class="line"></span>
+                                <img src="   {% static 'img/17a.jpg' %} " alt="">
+                                <span class="line2"></span>
+                            </div>
+
+                            <div class="flip-card-back">
+                                <h1 style="color: white;">Rema</h1>
+                                <p>Whats Hot 🔥</p>
+                                <p>Rema has released the visual for his song, Ginger Me. Earlier in July, Rema dropped his new single “Ginger Me” on Mavin Records/Jonzing World</p>
+                            </div>
+
+                        </div>
                     </div>
                 </div>
 
                 <!-- About Us Content -->
                 <div class="col-12 col-lg-4">
                     <div class="about-us-content mb-50 wow fadeInUp" data-wow-delay="700ms">
-                        <h2 style="color: rgb(255, 255, 255);">We Have Different Shows To Suit Your Taste</h2>
-                        <p>Lorem ipsum dolor sit amet, consetetur sadipscing esed diam nonumy eirmod tempor invidunt ut
-                            labore et
-                            dolore magna.</p>
-                        <p>At vero eos et accusam et justo duo dolores et ea rebum. Stet gubergren no sea takimata
-                            sanctus est Lorem
-                            ipsum dolor sit amet ipsumlor eut consetetur sadipscing elitr.</p>
+                        <div>
+                            <img src="{% static 'img/mtn.jpg' %}" alt="">
+                        </div>
+                        <br><br>
+                        <h2 style="color: rgb(255, 255, 255);">Mtn :: Everywhere you Go </h2>
+         
                     </div>
                 </div>
             </div>
@@ -688,9 +810,6 @@
 
     <div class="owl-carousel owl owl-theme">
         <!-- ***** Model Area Start ***** -->
-
-
-
 
         <!-- Test Mode -->
         <section class="mona-model-area">
@@ -761,7 +880,7 @@
 
                             <ul class="nav nav-tabs mb-50" id="mona_modelTab" role="tablist">
                                 <div class="display-4" style=" display: flex; color: white;">
-                                    New Music To Lookout For
+                                    Latest Albums/Ep's
                                 </div>
                             </ul>
                         </div>
@@ -783,23 +902,23 @@
 
                                         <!-- Single Model Item -->
 
-                                        {% for nmtlf in newmusictolookoutfor %}
+                                        {% for la in latestalbums %}
                                         <div class="single-model-item">
                                             <div class="model-thumbnail">
                                                 <!-- First Thumbnail -->
-                                                <img class="first-thumbnail" src="media/{{nmtlf.song_cover}}" alt="">
+                                                <img class="first-thumbnail" src="media/{{la.song_cover}}" alt="">
                                                 <!-- Second Thumbnail -->
-                                                <img class="second-thumbnail" src="media/{{nmtlf.song_cover}}" alt="">
+                                                <img class="second-thumbnail" src="media/{{la.song_cover}}" alt="">
                                                 <!-- Share Info -->
                                             </div>
                                             <div class="model-info">
                                                 <!-- <h3>Peter Alvarez</h3> -->
-                                                <h6 style="text-align: center; color: white;" >{{nmtlf.title}}</h6>
+                                                <h6 style="text-align: center; color: white;">{{la.title}}</h6>
                                             </div>
                                         </div>
                                         {% endfor %}
 
-                                       
+
 
                                     </div>
                                 </div>
@@ -848,16 +967,16 @@
                                                 <img class="first-thumbnail" src="media/{{nmotb.song_cover}}" alt="">
                                                 <!-- Second Thumbnail -->
                                                 <img class="second-thumbnail" src="media/{{nmotb.song_cover}}" alt="">
-                                
+
                                             </div>
                                             <div class="model-info">
                                                 <!-- <h3>Peter Alvarez</h3> -->
-                                                <h6 style="text-align: center; color: white;" >{{nmotb.title}}</h6>
+                                                <h6 style="text-align: center; color: white;">{{nmotb.title}}</h6>
                                             </div>
                                         </div>
                                         {% endfor %}
 
-                                      
+
 
 
                                     </div>
@@ -878,7 +997,7 @@
 
                             <ul class="nav nav-tabs mb-50" id="mona_modelTab" role="tablist">
                                 <div class="display-4" style=" display: flex; color: white;">
-                                    Latest Collabs
+                                    Events In The City
                                 </div>
                             </ul>
                         </div>
@@ -899,13 +1018,13 @@
 
 
                                         <!-- Single Model Item -->
-                                        {% for lc in latestcolabs %}
+                                        {% for eitc in eventsinthecity %}
                                         <div class="single-model-item">
                                             <div class="model-thumbnail">
                                                 <!-- First Thumbnail -->
-                                                <img class="first-thumbnail" src="media/{{lc.song_cover}}" alt="">
+                                                <img class="first-thumbnail" src="media/{{eitc.song_cover}}" alt="">
                                                 <!-- Second Thumbnail -->
-                                                <img class="second-thumbnail" src="media/{{lc.song_cover}}" alt="">
+                                                <img class="second-thumbnail" src="media/{{eitc.song_cover}}" alt="">
                                                 <!-- Share Info -->
                                                 <div class="share-info">
                                                     <!-- Share Icon -->
@@ -916,74 +1035,12 @@
                                             </div>
                                             <div class="model-info">
                                                 <!-- <h3>Peter Alvarez</h3> -->
-                                                <h6 style="text-align: center; color: white;">{{lc.title}}</h6>
+                                                <h6 style="text-align: center; color: white;">{{eitc.title}}</h6>
                                             </div>
                                         </div>
                                         {% endfor %}
 
-                             
 
-
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="mona-model-area1">
-            <div class="container">
-                <div class="row">
-                    <div class="col-12">
-                        <div class="model-tab-area">
-
-                            <ul class="nav nav-tabs mb-50" id="mona_modelTab" role="tablist">
-                                <div class="display-4" style=" display: flex; color: white;">
-                                    Albums To Lookout For
-                                </div>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Mona Tab Content -->
-            <div class="mona-tab-content1">
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="tab-content" id="mona_modelTabContent">
-                                <div class="tab-pane fade show active" id="tab-1" role="tabpanel"
-                                    aria-labelledby="tab1">
-                                    <!-- All Model Slide -->
-                                    <div class="mona-all-model-slide owl-carousel">
-
-
-                                        <!-- Single Model Item -->
-                                        {% for atlf in albumstolookoutfor %}
-                                        <div class="single-model-item">
-                                            <div class="model-thumbnail">
-                                                <!-- First Thumbnail -->
-                                                <img class="first-thumbnail" src="media/{{atlf.song_cover}}" alt="">
-                                                <!-- Second Thumbnail -->
-                                                <img class="second-thumbnail" src="media/{{atlf.song_cover}}" alt="">
-                                                <!-- Share Info -->
-                                                <div class="share-info">
-                                                    <!-- Share Icon -->
-                                                    <div class="share-icon">
-                                                        <a href="#"><i class="fa fa-play" aria-hidden="true"></i></a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="model-info">
-                                                <!-- <h3>Peter Alvarez</h3> -->
-                                                <h6 style="text-align: center; color: white;" >{{atlf.title}}</h6>
-                                            </div>
-                                        </div>
-                                        {% endfor %}
 
 
                                     </div>
@@ -1059,12 +1116,12 @@
                 <div class="col-12 col-lg-4">
                     <div class="single-blog-post mb-30 wow fadeInUp" data-wow-delay="100ms">
                         <div class="post-thumbnail slide-post owl-carousel">
-                            <a href="#"><img src="   {% static 'img/3.jpg' %}" alt=""></a>
-                            <a href="#"><img src="  {% static 'img/4.jpg' %} " alt=""></a>
+                            <a href="#"><img  src="{% static 'img/loki.jpg' %}" alt=""></a>
+                            <a href="#"><img src="  {% static 'img/loki1.jpg' %} " alt=""></a>
                         </div>
                         <div class="post-content">
-                            <a href="#" class="post-title" style="color: teal;">Movies for the Summer</a>
-                            <span class="post-date">Premeires::30 Aug 2021</span>
+                            <a href="#" class="post-title" style="color: teal;">Loki</a>
+                            <span class="post-date">Premeires::9 July 2021</span>
                         </div>
                     </div>
                 </div>
@@ -1076,11 +1133,11 @@
                         <div class="col-12 col-sm-6">
                             <div class="single-blog-post mb-30 wow fadeInUp" data-wow-delay="500ms">
                                 <div class="post-thumbnail">
-                                    <a href="#"><img src="   {% static 'img/1.webp' %} " alt=""></a>
+                                    <a href="#"><img src="   {% static 'img/kingofboys.jpg' %} " alt=""></a>
                                 </div>
                                 <div class="post-content">
-                                    <a href="#" class="post-title" style="color: tan;">Movies for the Winter</a>
-                                    <span class="post-date">Premeires:: 1 Dec 2021</span>
+                                    <a href="#" class="post-title" style="color: tan;">King Of Boys: Laburu Returns</a>
+                                    <span class="post-date">Premeires:: 27 August 2021</span>
                                 </div>
                             </div>
                         </div>
@@ -1089,11 +1146,11 @@
                         <div class="col-12 col-sm-6">
                             <div class="single-blog-post mb-30 wow fadeInUp" data-wow-delay="700ms">
                                 <div class="post-thumbnail">
-                                    <a href="#"><img src="   {% static 'img/hid2.webp' %}" alt=""></a>
+                                    <a href="#"><img src="   {% static 'img/hitman.jpg' %}" alt=""></a>
                                 </div>
                                 <div class="post-content">
-                                    <a href="#" class="post-title" style="color: slateblue;">Series That Never End</a>
-                                    <span class="post-date">Premeires:: 1 Jan 2022</span>
+                                    <a href="#" class="post-title" style="color: slateblue;">Hitman's Wife's BodyGuard</a>
+                                    <span class="post-date">Premeires:: 30 July 2021</span>
                                 </div>
                             </div>
                         </div>
@@ -1111,9 +1168,9 @@
             <div class="row">
                 <div class="col-12">
                     <div class="cta-content">
-                        <h2>Do You Want To Experience Television Like Never Before?</h2>
-                        <h6>Create An Account Now and Relive All The Moments in African Movies.</h6>
-                        <a href="#" class="btn mona-btn">Create Account</a>
+                        <h2>To Experience Entertainment Like Never Before</h2>
+                        <h6>Create An Account Now and Have Fun.</h6>
+                        <a  data-toggle="modal" data-target="#signupmodal" class="btn mona-btn">Create Account</a>
                     </div>
                 </div>
             </div>
@@ -1146,8 +1203,6 @@
                                     class="fa fa-facebook"></i></a>
                             <a href="#" class="twitter" data-toggle="tooltip" data-placement="top" title="Twitter"><i
                                     class="fa fa-twitter"></i></a>
-                            <a href="#" class="pinterest" data-toggle="tooltip" data-placement="top"
-                                title="Pinterest"><i class="fa fa-pinterest"></i></a>
                             <a href="#" class="instagram" data-toggle="tooltip" data-placement="top"
                                 title="Instagram"><i class="fa fa-instagram"></i></a>
                             <a href="#" class="youtube" data-toggle="tooltip" data-placement="top" title="YouTube"><i
