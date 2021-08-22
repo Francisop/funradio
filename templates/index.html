@@ -812,63 +812,7 @@
         <!-- ***** Model Area Start ***** -->
 
         <!-- Test Mode -->
-        <section class="mona-model-area">
-            <div class="container">
-                <div class="row">
-                    <div class="col-12">
-                        <div class="model-tab-area">
-                            <ul class="nav nav-tabs mb-50" id="mona_modelTab" role="tablist">
-                                <div class="display-4" style=" display: flex; color: white;">
-                                    Collections to Lookout For
-                                </div>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
 
-
-
-            <!-- Mona Tab Content -->
-            <div class="mona-tab-content">
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="tab-content" id="mona_modelTabContent">
-                                <div class="tab-pane fade show active" id="tab-1" role="tabpanel"
-                                    aria-labelledby="tab1">
-                                    <!-- All Model Slide -->
-                                    <div class="mona-all-model-slide owl-carousel">
-
-
-                                        <!-- Single Model Item -->
-
-                                        {% for ctlf in collectionstolookoutfor %}
-                                        <div class="single-model-item">
-                                            <div class="model-thumbnail">
-                                                <!-- First Thumbnail -->
-                                                <img class="first-thumbnail" src="media/{{ctlf.song_cover}}" alt="">
-                                                <!-- Second Thumbnail -->
-                                                <img class="second-thumbnail" src="media/{{ctlf.song_cover}}" alt="">
-                                            </div>
-
-                                            <div class="model-info">
-                                                <h3 style="text-align: center; color: white; ">{{ ctlf.title }}</h3>
-                                            </div>
-
-                                        </div>
-                                        {% endfor %}
-
-                                        <!-- Single Model Item -->
-
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
 
         <!-- end  Test Mode -->
 
