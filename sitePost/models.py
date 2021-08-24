@@ -4,16 +4,7 @@ from random import randint
 
 # Create your models here.
 
-class CollectionsToLookoutFor(models.Model):
-    song_cover = models.ImageField(upload_to = "siteImages/CollectionsToLookoutFor/")
-    title = models.CharField(max_length=200)
     
-    objects = models.Manager()
-    
-    def __str__(self):
-        return self.title
-    
-
 class NewMusicOnTheBlock(models.Model):
     song_cover = models.ImageField(upload_to = "siteImages/NewMusicOnTheBlock/")
     title = models.CharField(max_length=200)

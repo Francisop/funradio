@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.hashers import make_password
-from sitePost.models import (CollectionsToLookoutFor, LatestAlbums, EventsInTheCity, NewMusicOnTheBlock,Song)
+from sitePost.models import (LatestAlbums, EventsInTheCity, NewMusicOnTheBlock,Song)
 from django.contrib.auth import get_user_model
 import json
 # from django.http import HttpResponse
@@ -12,7 +12,6 @@ User = get_user_model()
 
 
 def index(request):
-    collectionstolookoutfor = CollectionsToLookoutFor.objects.all()
     latestalbums = LatestAlbums.objects.all()
     newmusicontheblock = NewMusicOnTheBlock.objects.all()
     eventsinthecity = EventsInTheCity.objects.all()
@@ -41,7 +40,6 @@ def index(request):
                 login(request,user)
                 currentUser = True
                 context = {     
-                           "collectionstolookoutfor":collectionstolookoutfor,
                             "eventsinthecity":eventsinthecity,
                             "latestalbums":latestalbums,
                             "newmusicontheblock":newmusicontheblock,
@@ -61,7 +59,6 @@ def index(request):
             user = User.objects.create(email = email,password = make_password(password))
             user.save()
             context = {
-                  "collectionstolookoutfor":collectionstolookoutfor,
                             "eventsinthecity":eventsinthecity,
                             "latestalbums":latestalbums,
                             "newmusicontheblock":newmusicontheblock,
@@ -81,7 +78,6 @@ def index(request):
             return render(request, 'index.html', context)
                
     context = {
-     "collectionstolookoutfor":collectionstolookoutfor,
                             "eventsinthecity":eventsinthecity,
                             "latestalbums":latestalbums,
                             "newmusicontheblock":newmusicontheblock,

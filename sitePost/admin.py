@@ -3,7 +3,6 @@ from sitePost.models import (CollectionsToLookoutFor, LatestAlbums, EventsInTheC
 
 # Register your models here.
 admin.site.register(LatestAlbums)
-admin.site.register(CollectionsToLookoutFor)
 admin.site.register(EventsInTheCity)
 admin.site.register(NewMusicOnTheBlock)
 admin.site.register(Song)
